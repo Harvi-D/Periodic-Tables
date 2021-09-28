@@ -51,6 +51,17 @@ function validTime(time) {
   return time.match(timeStyle)?.[0];
 }
 
+function notTuesday(reservationDate) {
+  const date = new Date(reservationDate);
+  return date.getUTCDay() !== 2;
+}
+
+function notPastDate(reservation_time, reservation_date) {
+  const currentDay = Date.now();
+  const reservationDate = new Date(`${reservation_date} ${reservation_time}`);
+  return reservationDate.valueOf() > currentDay;
+}
+
 function hasValidValues(req, res, next) {
   const { reservation_date, reservation_time, people } = req.body.data;
 
@@ -72,6 +83,20 @@ function hasValidValues(req, res, next) {
     return next({
       status: 400,
       message: `reservation_time must be formatted as: HH:MM.`
+    });
+  }
+
+  if (!notTuesday(reservation_date)) {
+    return next({
+      status: 400,
+      message: 'The restaurant is closed on Tuesday.'
+    });
+  }
+
+  if (!notPastDate(reservation_time, reservation_date)) {
+    return next({
+      status: 400, 
+      message: `Only future reservations are permitted.`
     });
   }
   next();
