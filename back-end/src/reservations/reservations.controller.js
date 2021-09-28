@@ -62,6 +62,12 @@ function notPastDate(reservation_time, reservation_date) {
   return reservationDate.valueOf() > currentDay;
 }
 
+function duringBusinessHours(reservation_time) {
+  const open = '10:30';
+  const closed = '21:30';
+  return reservation_time <= closed && reservation_time >= open;
+}
+
 function hasValidValues(req, res, next) {
   const { reservation_date, reservation_time, people } = req.body.data;
 
@@ -89,7 +95,7 @@ function hasValidValues(req, res, next) {
   if (!notTuesday(reservation_date)) {
     return next({
       status: 400,
-      message: 'The restaurant is closed on Tuesday.'
+      message: `The restaurant is closed on Tuesday.`
     });
   }
 
@@ -97,6 +103,13 @@ function hasValidValues(req, res, next) {
     return next({
       status: 400, 
       message: `Only future reservations are permitted.`
+    });
+  }
+
+  if (!duringBusinessHours(reservation_time)) {
+    return next({
+      status: 400,
+      message: `The restaurant accepts reservations between 10:30 am and 9:30 pm.`
     });
   }
   next();
