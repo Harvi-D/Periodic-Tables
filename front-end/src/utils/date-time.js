@@ -80,3 +80,43 @@ export function next(currentDate) {
   date.setDate(date.getDate() + 1);
   return asDateString(date);
 }
+
+export function dayAndDate(date) {
+  const year = date.split("-")[0];
+  const month = date.split("-")[1];
+  const day = date.split("-")[2];
+  const newDate = new Date(`${date}T00:00:00`);
+  const dayOfWeek = newDate.getDay();
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+  return (
+    `${days[dayOfWeek]} ${month}/${day}/${year}`
+  )
+}
+
+export function twelveHour(time) {
+  const hour = time.split(":")[0];
+  const mins = time.split(":")[1];
+
+  const AmOrPm = hour >=12 ? "pm" : "am";
+
+  if (Number(hour) > 12) {
+    const standardHour = hour % 12;
+    return (
+      `${standardHour}:${mins}${AmOrPm}`
+    )
+  }
+  return (
+    `${hour}:${mins}${AmOrPm}`
+  )
+}
+
+export function usStandardDate(date) {
+  const year = date.split("-")[0];
+  const month = date.split("-")[1];
+  const day = date.split("-")[2];
+
+  return (
+    `${month}/${day}/${year}`
+  )
+}
