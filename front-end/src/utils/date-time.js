@@ -57,7 +57,7 @@ export function today() {
  *  the date one day prior to currentDate, formatted as YYYY-MM-DD
  */
 export function previous(currentDate) {
-  let [ year, month, day ] = currentDate.split("-");
+  let [year, month, day] = currentDate.split("-");
   month -= 1;
   const date = new Date(year, month, day);
   date.setMonth(date.getMonth());
@@ -73,7 +73,7 @@ export function previous(currentDate) {
  *  the date one day after currentDate, formatted as YYYY-MM-DD
  */
 export function next(currentDate) {
-  let [ year, month, day ] = currentDate.split("-");
+  let [year, month, day] = currentDate.split("-");
   month -= 1;
   const date = new Date(year, month, day);
   date.setMonth(date.getMonth());
@@ -81,42 +81,47 @@ export function next(currentDate) {
   return asDateString(date);
 }
 
-export function dayAndDate(date) {
-  const year = date.split("-")[0];
-  const month = date.split("-")[1];
-  const day = date.split("-")[2];
-  const newDate = new Date(`${date}T00:00:00`);
-  const dayOfWeek = newDate.getDay();
-  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+export const formatDate = (date) => {
+  const months = {
+    1: "January",
+    2: "February",
+    3: "March",
+    4: "April",
+    5: "May",
+    6: "June",
+    7: "July",
+    8: "August",
+    9: "September",
+    10: "October",
+    11: "November",
+    12: "December",
+  };
 
-  return (
-    `${days[dayOfWeek]} ${month}/${day}/${year}`
-  )
-}
+  const month = months[Number(date.slice(5, 7))];
+  const day = Number(date.slice(8, 10));
+  const year = Number(date.slice(0, 4));
 
-export function twelveHour(time) {
-  const hour = time.split(":")[0];
-  const mins = time.split(":")[1];
+  return `${month} ${day}, ${year}`;
+};
 
-  const AmOrPm = hour >=12 ? "pm" : "am";
-
-  if (Number(hour) > 12) {
-    const standardHour = hour % 12;
-    return (
-      `${standardHour}:${mins}${AmOrPm}`
-    )
+export const formatTime = (time) => {
+  let hour = time[0] + time[1];
+  let minutes = time[3] + time[4];
+  let meridiem = "AM";
+  if (Number(hour) >= 12) {
+    meridiem = "PM";
+    Number(hour) === 12 ? (hour = 12) : (hour -= 12);
   }
-  return (
-    `${hour}:${mins}${AmOrPm}`
-  )
-}
+  return `${hour}:${minutes} ${meridiem}`;
+};
 
-export function usStandardDate(date) {
-  const year = date.split("-")[0];
-  const month = date.split("-")[1];
-  const day = date.split("-")[2];
-
-  return (
-    `${month}/${day}/${year}`
-  )
-}
+export const formatPhone = (number) => {
+  const cleaned = ("" + number).replace(/\D/g, "");
+  const match = cleaned.match(/^(1|)?(\d{3})?(\d{3})(\d{4})$/);
+  if (match) {
+    const intlCode = match[1] ? "+1 " : "";
+    const areaCode = match[2] ? `(${match[2]})` : "";
+    return [intlCode, areaCode, match[3], "-", match[4]].join("");
+  }
+  return number;
+};

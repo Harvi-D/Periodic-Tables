@@ -2,3 +2,7 @@
   background-color: #393a44;
   min-width: 200px;
 }
+
+* {
+  font-family: 'Quicksand', sans-serif;
+}

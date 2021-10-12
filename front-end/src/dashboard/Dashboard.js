@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { listReservations, cancelReservation } from "../utils/api";
+import { listReservations, listTables } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
-import Reservations from './Reservations';
-import { useHistory } from "react-router";
-import { previous, next, today, dayAndDate } from "../utils/date-time";
+import { useLocation } from "react-router-dom";
+import { today, next, previous, formatDate } from "../utils/date-time";
+import Reservation from "./Reservations";
+import Tables from "./Tables";
 
 /**
  * Defines the dashboard page.
@@ -11,43 +12,74 @@ import { previous, next, today, dayAndDate } from "../utils/date-time";
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
- function Dashboard({ date }) {
-  const history = useHistory();
+function Dashboard() {
+  function useQuery() {
+    return new URLSearchParams(useLocation().search);
+  }
+  const query = useQuery();
+  //let date = query.get("date") || today();
   const [reservations, setReservations] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
- 
+  const [tables, setTables] = useState([]);
+  const [tablesError, setTablesError] = useState(null);
+  const [date, setDate] = useState(query.get("date") || today());
 
   useEffect(loadDashboard, [date]);
 
+  const handleDateChange = (event) => {
+    setDate(event.target.value);
+  };
+
   function loadDashboard() {
-    const abortController = new window.AbortController();
+    const abortController = new AbortController();
     setReservationsError(null);
     listReservations({ date }, abortController.signal)
       .then(setReservations)
       .catch(setReservationsError);
-
+    listTables(abortController.signal).then(setTables).catch(setTablesError);
+    return () => abortController.abort();
   }
-
-  function onCancel(reservation_id) {
-    cancelReservation(reservation_id)
-      .then(loadDashboard)
-      .catch(setReservationsError);
-  }
-
 
   return (
-    <main className="text-center mt-3 font">
-      <h1>Dashboard</h1>
-      <div className="mb-3" role="group" aria-label="Date Buttons">
-        <button className="btn btn-dark mr-2" onClick={() => history.push(`/dashboard?date=${previous(date)}`)}>Previous</button>
-        <button className="btn btn-secondary" onClick={() => history.push(`/dashboard?date=${today()}`)}>Today</button>
-        <button className="btn btn-dark ml-2" onClick={() => history.push(`/dashboard?date=${next(date)}`)}>Next</button>
-      </div>
-      <div className="d-md-flex mb-3 justify-content-center pt-2">
-        <h4 className="mb-0">Reservations for {dayAndDate(date)}</h4>
-      </div>
+    <main className="text-center">
+      <h1 className="m-3">{formatDate(date)}</h1>
+      <button onClick={() => setDate(previous(date))} className="btn btn-sm btn-light">Previous Day</button>
+      <button className="mx-3 btn btn-sm btn-light" onClick={() => setDate(today())}>
+        Today
+      </button>
+      <button onClick={() => setDate(next(date))} className="btn btn-sm btn-light">Next Day</button>
+      <br />
+      <label htmlFor="reservation_date" className="form-label m-3">
+        <input
+          type="date"
+          pattern="\d{4}-\d{2}-\d{2}"
+          name="reservation_date"
+          onChange={handleDateChange}
+          value={date}
+        />
+      </label>
+      <div className="d-md-flex mb-3 "></div>
       <ErrorAlert error={reservationsError} />
-      <Reservations reservations={reservations} onCancel={onCancel} />
+      <ErrorAlert error={tablesError} />
+      <h3>Tables </h3>
+      <div className="d-flex justify-content-center mb-1 flex-wrap">
+        {tables.map((table) => (
+          <Tables key={table.table_id} table={table} />
+        ))}
+      </div>
+      {reservations.length ? (
+        <h3>Reservations</h3>
+      ) : (
+        `No reservations for ${date}`
+      )}
+      <div className="d-flex justify-content-center flex-wrap">
+        {reservations.map((reservation) => (
+          <Reservation
+            key={reservation.reservation_id}
+            reservation={reservation}
+          />
+        ))}
+      </div>
     </main>
   );
 }

@@ -1,47 +1,82 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import { formatAsTime, twelveHour, usStandardDate } from '../utils/date-time';
+import { updateStatus } from "../utils/api";
+import { formatDate, formatTime, formatPhone } from "../utils/date-time";
 
-function Reservations({onCancel, reservations = [] }) {
-    function cancelHandler({
-        target: { dataset: { reservationIdCancel } } = {},
-    }) {
-        if (
-          reservationIdCancel &&
-          window.confirm(
-            "Do you want to cancel this reservation? This cannot be undone."
-          )
-        ) {
-          onCancel(reservationIdCancel);
-        }
+function Reservations({ reservation, type }) {
+  const date = formatDate(reservation.reservation_date);
+  const time = formatTime(reservation.reservation_time);
+  const phone = formatPhone(reservation.mobile_number);
+
+  const handleCancel = async () => {
+    if (
+      window.confirm(
+        "Do you want to cancel this reservation? \n \n \nThis cannot be undone."
+      )
+    ) {
+      try {
+        await updateStatus(reservation.reservation_id, {
+          data: { status: "cancelled" },
+        });
+        window.location.reload();
+      } catch (error) {
+        console.error(error);
+      }
     }
-    const rows = reservations.map((reservation) => {
-        return (
-          <div key={reservation.reservation_id} className="card mb-1">
-            <div className="card-body">
-              <h5 className="card-title">{reservation.first_name} {reservation.last_name}</h5>
-              <h6 className="card-subtitle mb-2 text-muted">{reservation.mobile_number}</h6>
-              <p className="card-text">{twelveHour(formatAsTime(reservation.reservation_time))}</p>
-              <p className="card-text">{usStandardDate(reservation.reservation_date)}</p>
-              <p className="card-text">Party Size: {reservation.people}</p>
-              <p className="card-text" data-reservation-id-status={reservation.reservation_id}>Status: {reservation.status}</p>
-              {reservation.status === "booked" ? (
-                <div>
-                    <Link className="btn btn-dark m-2" to={`/reservations/${reservation.reservation_id}/seat`}>seat</Link>
-                    <Link className="btn btn-secondary m-2" to={`/reservations/${reservation.reservation_id}/edit`}>edit</Link>
-                    <button type="button" className="btn cancel btn-danger m-2" data-reservation-id-cancel={reservation.reservation_id} onClick={cancelHandler}>cancel</button>
-                </div>) : ( "" )}
-            </div>
+  };
+
+  return (
+    <>
+      <div className="card m-3 bg-light" style={{ width: "18rem" }}>
+        <div className="card-body">
+          <div className="d-flex justify-content-between">
+            <h4 className="card-title">
+              {reservation.first_name} {reservation.last_name}
+            </h4>
+            <h6>
+              <span className="oi oi-people m-2"> </span>
+              {reservation.people}
+            </h6>
           </div>
-        )
-      });
-      
-    return reservations.length ? (
-      <div>{rows}</div>
-    ) : (
-      <div>No reservations found</div>
-    );
-  }
-  
+
+          <div className="d-flex justify-content-between">
+            <h6>{date}</h6>
+            <h6>{time}</h6>
+          </div>
+          <div className="d-flex justify-content-between">
+            <h6>{phone}</h6>
+
+            <h5 data-reservation-id-status={reservation.reservation_id}>
+              {reservation.status}
+            </h5>
+          </div>
+
+          {reservation.status === "booked" && !type ? (
+            <>
+              <Link
+                to={`/reservations/${reservation.reservation_id}/seat`}
+                className="btn btn-info btn-sm"
+              >
+                Seat
+              </Link>
+              <button
+                data-reservation-id-cancel={reservation.reservation_id}
+                className="mx-3 btn btn-danger btn-sm"
+                onClick={handleCancel}
+              >
+                Cancel
+              </button>
+              <Link
+                to={`/reservations/${reservation.reservation_id}/edit`}
+                className="btn btn-warning btn-sm"
+              >
+                Edit
+              </Link>
+            </>
+          ) : null}
+        </div>
+      </div>
+    </>
+  );
+}
 
 export default Reservations;
