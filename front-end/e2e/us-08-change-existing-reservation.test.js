@@ -1,5 +1,4 @@
 const puppeteer = require("puppeteer");
-const { setDefaultOptions } = require('expect-puppeteer');
 const fs = require("fs");
 const fsPromises = fs.promises;
 
@@ -21,7 +20,6 @@ describe("US-08 - Change an existing reservation - E2E", () => {
 
   beforeAll(async () => {
     await fsPromises.mkdir("./.screenshots", { recursive: true });
-    setDefaultOptions({ timeout: 1000 });
     browser = await puppeteer.launch();
   });
 
@@ -29,7 +27,7 @@ describe("US-08 - Change an existing reservation - E2E", () => {
     reservation = await createReservation({
       first_name: "Change",
       last_name: Date.now().toString(10),
-      mobile_number: "555-1616",
+      mobile_number: "503-555-1616",
       reservation_date: "2035-01-04",
       reservation_time: "14:00",
       people: 4,

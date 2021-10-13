@@ -3,7 +3,7 @@ import { listReservations, listTables } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import { useLocation } from "react-router-dom";
 import { today, next, previous, formatDate } from "../utils/date-time";
-import Reservation from "./Reservations";
+import Reservations from "./Reservations";
 import Tables from "./Tables";
 
 /**
@@ -17,7 +17,7 @@ function Dashboard() {
     return new URLSearchParams(useLocation().search);
   }
   const query = useQuery();
-  //let date = query.get("date") || today();
+
   const [reservations, setReservations] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
   const [tables, setTables] = useState([]);
@@ -74,7 +74,7 @@ function Dashboard() {
       )}
       <div className="d-flex justify-content-center flex-wrap">
         {reservations.map((reservation) => (
-          <Reservation
+          <Reservations
             key={reservation.reservation_id}
             reservation={reservation}
           />
