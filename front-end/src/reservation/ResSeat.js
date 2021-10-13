@@ -43,7 +43,7 @@ function ResSeat() {
     } catch (error) {
       if (error.response)
         setTablesError({ message: error.response.data.error });
-        if(!error.response) setTablesError(error)
+      if (!error.response) setTablesError(error);
     }
   };
   const handleChange = (event) => {
@@ -57,10 +57,14 @@ function ResSeat() {
   return (
     <>
       <div className="d-flex flex-column align-items-center justify-content-center mt-5">
+        <div className="row justify-content-center">
+        {reservation.reservation_time && (
+          <Reservations reservation={reservation} type="seating" />
+        )}
         <form
           action=""
           onSubmit={handleSubmit}
-          className="d-flex flex-column justify-content-center"
+          className="d-flex flex-column"
         >
           <label htmlFor="table_id">
             <select
@@ -68,6 +72,7 @@ function ResSeat() {
               name="table_id"
               onChange={handleChange}
               value={formData}
+              className="mt-3 bg-light text-secondary font-weight-bold border-secondary rounded"
             >
               <option>Please Select a table</option>
               {tables.map((table) => {
@@ -79,19 +84,19 @@ function ResSeat() {
               })}
             </select>
           </label>
-          <button type="submit" className="btn btn-sm btn-primary">
-            Submit
+          </form>
+          
+        </div>
+        <div className="row mt-2">
+          <button type="submit" className="btn btn-sm btn-info mr-3">
+          <span className="oi oi-check"></span> Submit
           </button>
-        </form>
-        <button
-          onClick={handleCancel}
-          className="mb-5 mt-2 btn btn-sm btn-danger"
-        >
-          Cancel
-        </button>
-        {reservation.reservation_time && (
-          <Reservations reservation={reservation} type="seating" />
-        )}
+
+          <button onClick={handleCancel} className="btn btn-sm btn-danger">
+          <span className="oi oi-x"></span> Cancel
+          </button>
+          </div>
+        
         <ErrorAlert error={tablesError} />
         <ErrorAlert error={reservationError} />
       </div>
