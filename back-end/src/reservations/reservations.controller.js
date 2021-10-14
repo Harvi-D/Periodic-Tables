@@ -27,9 +27,9 @@ function hasValidFields(req, res, next) {
     return next();
   }
   next({
-      status: 400,
-      message: `Invalid field(s): ${invalidFields.join(", ")}`,
-    });
+    status: 400,
+    message: `Invalid field(s): ${invalidFields.join(", ")}`,
+  });
 }
 
 //verify existing reservation
@@ -79,9 +79,9 @@ function bodyHasData(propertyName) {
     if (data[propertyName]) {
       return next();
     }
-    next({ 
-      status: 400, 
-      message: `Must include ${propertyName}.` 
+    next({
+      status: 400,
+      message: `Must include ${propertyName}.`,
     });
   };
 }
@@ -179,9 +179,9 @@ function isTime(req, res, next) {
   ) {
     return next();
   }
-  next({ 
-    status: 400, 
-    message: `Invalid reservation_time.` 
+  next({
+    status: 400,
+    message: `Invalid reservation_time.`,
   });
 }
 

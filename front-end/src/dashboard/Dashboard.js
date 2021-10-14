@@ -43,27 +43,26 @@ function Dashboard() {
   return (
     <main className="text-center">
       <h1 className="m-3">{formatDate(date)}</h1>
-      <button 
-        onClick={() => setDate(previous(date))} 
-        className="btn btn-sm btn-secondary font-weight-bold text-light">
-          <span className="oi oi-arrow-left"></span> Previous Day
-          </button>
-      <button 
-      onClick={() => setDate(today())}
-      className="mx-3 btn btn-sm btn-dark font-weight-bold text-light" 
+      <button
+        onClick={() => setDate(previous(date))}
+        className="btn btn-sm btn-secondary font-weight-bold text-light"
+      >
+        <span className="oi oi-arrow-left"></span> Previous Day
+      </button>
+      <button
+        onClick={() => setDate(today())}
+        className="mx-3 btn btn-sm btn-dark font-weight-bold text-light"
       >
         Today
       </button>
-      <button 
-      onClick={() => setDate(next(date))} 
-      className="btn btn-sm btn-secondary font-weight-bold text-light"
+      <button
+        onClick={() => setDate(next(date))}
+        className="btn btn-sm btn-secondary font-weight-bold text-light"
       >
         Next Day <span className="oi oi-arrow-right"></span>
-        </button>
+      </button>
       <br />
-      <label 
-      htmlFor="reservation_date" 
-      className="form-label m-3 bg-light">
+      <label htmlFor="reservation_date" className="form-label m-3 bg-light">
         <input
           className="border-secondary rounded"
           type="date"
@@ -95,7 +94,6 @@ function Dashboard() {
           <Tables key={table.table_id} table={table} />
         ))}
       </div>
-      
     </main>
   );
 }

@@ -126,7 +126,8 @@ function sufficientCapacity(req, res, next) {
   }
   next({
     status: 400,
-    message: "Table capacity is not large enough for number of people in party.",
+    message:
+      "Table capacity is not large enough for number of people in party.",
   });
 }
 //^^^^^^^^^ !table middleware ^^^^^^^^^
@@ -148,7 +149,7 @@ async function resIdExists(req, res, next) {
     message: `Reservation: ${reservation_id} not found.`,
   });
 }
-//verify that reservation is not currently seated 
+//verify that reservation is not currently seated
 function resNotSeated(req, res, next) {
   if (res.locals.reservation.status !== "seated") {
     return next();
@@ -193,11 +194,11 @@ async function finish(req, res) {
 }
 
 async function list(req, res) {
-    const data = await service.list();
-    res.json({
-      data,
-    });
-  }
+  const data = await service.list();
+  res.json({
+    data,
+  });
+}
 //^^^^^^^^^^^^^^ !CRUDL ^^^^^^^^^^^^^^^^^
 
 module.exports = {

@@ -26,7 +26,10 @@ function Reservations({ reservation, type }) {
 
   return (
     <>
-      <div className="card m-3 bg-light border-secondary" style={{ width: "18rem" }}>
+      <div
+        className="card m-3 bg-light border-secondary"
+        style={{ width: "18rem" }}
+      >
         <div className="card-body">
           <div className="d-flex justify-content-between">
             <h4 className="card-title">
