@@ -51,5 +51,9 @@
   "dependencies": {
     "axios": "^0.21.1",
     "knex": "^0.95.6"
+  },
+  "engines": {
+    "node": "12.x",
+    "npm": "6.x"
   }
 }
