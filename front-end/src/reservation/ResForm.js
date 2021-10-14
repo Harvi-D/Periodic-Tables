@@ -75,134 +75,136 @@ function ResForm({ type }) {
   };
 
   return (
-    <form action="" onSubmit={handleSubmit}>
-      <ErrorAlert error={reservationsError} />
-      <div className="card border-secondary mt-2">
-        <div className="card-header text-center bg-dark text-light">
-          <h2>{type} Reservation</h2>
+    <>
+      <form action="" onSubmit={handleSubmit}>
+        <ErrorAlert error={reservationsError} />
+        <div className="card border-secondary mt-2">
+          <div className="card-header text-center bg-dark text-light">
+            <h2>{type} Reservation</h2>
+          </div>
+          <div className="form-row d-flex justify-content-center p-2">
+            <div className="form-group mx-4">
+              <label htmlFor="first_name" className="form-label">
+                First name:
+                <input
+                  className="form-control border-secondary bg-light"
+                  placeholder="Jane/John"
+                  id="first_name"
+                  type="text"
+                  name="first_name"
+                  onChange={handleChange}
+                  value={formData.first_name}
+                  required
+                />
+              </label>
+            </div>
+            <div className="form-group mx-4">
+              <label htmlFor="last_name" className="form-label">
+                Last name:
+                <input
+                  className="form-control border-secondary bg-light"
+                  placeholder="Doe"
+                  id="last_name"
+                  type="text"
+                  name="last_name"
+                  onChange={handleChange}
+                  value={formData.last_name}
+                  required
+                />
+              </label>
+            </div>
+            <div className="form-group mx-4">
+              <label htmlFor="mobile_number" className="form-label">
+                Phone number:
+                <input
+                  className="form-control border-secondary bg-light"
+                  placeholder="(xxx)xxx-xxx"
+                  id="mobile_number"
+                  type="tel"
+                  pattern="(1?)\(?([0-9]{3})?\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})"
+                  name="mobile_number"
+                  onChange={handleChange}
+                  value={formData.mobile_number}
+                  required
+                ></input>
+              </label>
+            </div>
+          </div>
+          <div className="form-row d-flex justify-content-center p-2">
+            <div className="form-group mx-4">
+              <label htmlFor="reservation_date" className="form-label">
+                Date:
+                <input
+                  className="form-control border-secondary bg-light"
+                  id="reservation_date"
+                  type="date"
+                  placeholder="YYYY-MM-DD"
+                  pattern="\d{4}-\d{2}-\d{2}"
+                  name="reservation_date"
+                  onChange={handleChange}
+                  value={formData.reservation_date}
+                  required
+                />
+              </label>
+            </div>
+            <div className="form-group mx-4">
+              <label htmlFor="reservation_time" className="form-label">
+                Time:
+                <input
+                  className="form-control border-secondary bg-light"
+                  id="reservation_time"
+                  type="time"
+                  placeholder="HH:MM"
+                  pattern="[0-9]{2}:[0-9]{2}"
+                  name="reservation_time"
+                  onChange={handleChange}
+                  value={formData.reservation_time}
+                  required
+                />
+              </label>
+            </div>
+            <div className="form-group mx-4">
+              <label htmlFor="people" className="form-label">
+                Number of guests:
+                <input
+                  className="form-control border-secondary bg-light"
+                  id="people"
+                  type="number"
+                  min="1"
+                  max="22"
+                  name="people"
+                  onChange={handleChange}
+                  value={formData.people}
+                  required
+                />
+              </label>
+            </div>
+          </div>
+          <div className="form-row d-flex justify-content-center">
+            <div className="form-group mx-4">
+              <button
+                type="submit"
+                className="m-2 btn btn-sm btn-outline-info font-weight-bold"
+              >
+                <span className="oi oi-check"></span> Submit
+              </button>
+              <button
+                className="m-2 btn btn-sm btn-outline-danger font-weight-bold"
+                onClick={() => history.goBack()}
+              >
+                <span className="oi oi-x"></span> Cancel
+              </button>
+              <button
+                className="m-2 btn btn-sm btn-outline-warning font-weight-bold"
+                onClick={() => setFormData(initialState)}
+              >
+                <span className="oi oi-action-undo"></span> Reset
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="form-row d-flex justify-content-center p-2">
-          <div className="form-group mx-4">
-            <label htmlFor="first_name" className="form-label">
-              First name:
-              <input
-                className="form-control border-secondary bg-light"
-                placeholder="Jane/John"
-                id="first_name"
-                type="text"
-                name="first_name"
-                onChange={handleChange}
-                value={formData.first_name}
-                required
-              />
-            </label>
-          </div>
-          <div className="form-group mx-4">
-            <label htmlFor="last_name" className="form-label">
-              Last name:
-              <input
-                className="form-control border-secondary bg-light"
-                placeholder="Doe"
-                id="last_name"
-                type="text"
-                name="last_name"
-                onChange={handleChange}
-                value={formData.last_name}
-                required
-              />
-            </label>
-          </div>
-          <div className="form-group mx-4">
-            <label htmlFor="mobile_number" className="form-label">
-              Phone number:
-              <input
-                className="form-control border-secondary bg-light"
-                placeholder="(xxx)xxx-xxx"
-                id="mobile_number"
-                type="tel"
-                pattern="(1?)\(?([0-9]{3})?\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})"
-                name="mobile_number"
-                onChange={handleChange}
-                value={formData.mobile_number}
-                required
-              ></input>
-            </label>
-          </div>
-        </div>
-        <div className="form-row d-flex justify-content-center p-2">
-          <div className="form-group mx-4">
-            <label htmlFor="reservation_date" className="form-label">
-              Date:
-              <input
-                className="form-control border-secondary bg-light"
-                id="reservation_date"
-                type="date"
-                placeholder="YYYY-MM-DD"
-                pattern="\d{4}-\d{2}-\d{2}"
-                name="reservation_date"
-                onChange={handleChange}
-                value={formData.reservation_date}
-                required
-              />
-            </label>
-          </div>
-          <div className="form-group mx-4">
-            <label htmlFor="reservation_time" className="form-label">
-              Time:
-              <input
-                className="form-control border-secondary bg-light"
-                id="reservation_time"
-                type="time"
-                placeholder="HH:MM"
-                pattern="[0-9]{2}:[0-9]{2}"
-                name="reservation_time"
-                onChange={handleChange}
-                value={formData.reservation_time}
-                required
-              />
-            </label>
-          </div>
-          <div className="form-group mx-4">
-            <label htmlFor="people" className="form-label">
-              Number of guests:
-              <input
-                className="form-control border-secondary bg-light"
-                id="people"
-                type="number"
-                min="1"
-                max="22"
-                name="people"
-                onChange={handleChange}
-                value={formData.people}
-                required
-              />
-            </label>
-          </div>
-        </div>
-        <div className="form-row d-flex justify-content-center">
-          <div className="form-group mx-4">
-            <button
-              type="submit"
-              className="m-2 btn btn-sm btn-outline-info font-weight-bold"
-            >
-              <span className="oi oi-check"></span> Submit
-            </button>
-            <button
-              className="m-2 btn btn-sm btn-outline-danger font-weight-bold"
-              onClick={() => history.goBack()}
-            >
-              <span className="oi oi-x"></span> Cancel
-            </button>
-            <button
-              className="m-2 btn btn-sm btn-outline-warning font-weight-bold"
-              onClick={() => setFormData(initialState)}
-            >
-              <span className="oi oi-action-undo"></span> Reset
-            </button>
-          </div>
-        </div>
-      </div>
-    </form>
+      </form>
+    </>
   );
 }
 

@@ -55,45 +55,47 @@ function ResSeat() {
   };
 
   return (
-    <form action="" onSubmit={handleSubmit} className="d-flex flex-column">
-      <div className="d-flex flex-column align-items-center justify-content-center mt-5">
-        <div className="row justify-content-center">
-          {reservation.reservation_time && (
-            <Reservations reservation={reservation} type="seating" />
-          )}
+    <>
+      <form action="" onSubmit={handleSubmit} className="d-flex flex-column">
+        <div className="d-flex flex-column align-items-center justify-content-center mt-5">
+          <div className="row justify-content-center">
+            {reservation.reservation_time && (
+              <Reservations reservation={reservation} type="seating" />
+            )}
 
-          <label htmlFor="table_id">
-            <select
-              id="table_id"
-              name="table_id"
-              onChange={handleChange}
-              value={formData}
-              className="mt-3 bg-light text-secondary font-weight-bold border-secondary rounded"
-            >
-              <option>Please Select a table</option>
-              {tables.map((table) => {
-                return (
-                  <option key={table.table_id} value={table.table_id}>
-                    {table.table_name} - {table.capacity}
-                  </option>
-                );
-              })}
-            </select>
-          </label>
-        </div>
-        <div className="row mt-2">
-          <button type="submit" className="btn btn-sm btn-info mr-3">
-            <span className="oi oi-check"></span> Submit
-          </button>
+            <label htmlFor="table_id">
+              <select
+                id="table_id"
+                name="table_id"
+                onChange={handleChange}
+                value={formData}
+                className="mt-3 bg-light text-secondary font-weight-bold border-secondary rounded"
+              >
+                <option>Please Select a table</option>
+                {tables.map((table) => {
+                  return (
+                    <option key={table.table_id} value={table.table_id}>
+                      {table.table_name} - {table.capacity}
+                    </option>
+                  );
+                })}
+              </select>
+            </label>
+          </div>
+          <div className="row mt-2">
+            <button type="submit" className="btn btn-sm btn-info mr-3">
+              <span className="oi oi-check"></span> Submit
+            </button>
 
-          <button onClick={handleCancel} className="btn btn-sm btn-danger">
-            <span className="oi oi-x"></span> Cancel
-          </button>
+            <button onClick={handleCancel} className="btn btn-sm btn-danger">
+              <span className="oi oi-x"></span> Cancel
+            </button>
+          </div>
+          <ErrorAlert error={tablesError} />
+          <ErrorAlert error={reservationError} />
         </div>
-        <ErrorAlert error={tablesError} />
-        <ErrorAlert error={reservationError} />
-      </div>
-    </form>
+      </form>
+    </>
   );
 }
 
