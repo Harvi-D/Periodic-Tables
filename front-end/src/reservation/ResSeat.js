@@ -55,17 +55,18 @@ function ResSeat() {
   };
 
   return (
-    <>
+    <main>
+      <form
+          action=""
+          onSubmit={handleSubmit}
+          className="d-flex flex-column"
+        >
       <div className="d-flex flex-column align-items-center justify-content-center mt-5">
         <div className="row justify-content-center">
         {reservation.reservation_time && (
           <Reservations reservation={reservation} type="seating" />
         )}
-        <form
-          action=""
-          onSubmit={handleSubmit}
-          className="d-flex flex-column"
-        >
+        
           <label htmlFor="table_id">
             <select
               id="table_id"
@@ -84,8 +85,6 @@ function ResSeat() {
               })}
             </select>
           </label>
-          </form>
-          
         </div>
         <div className="row mt-2">
           <button type="submit" className="btn btn-sm btn-info mr-3">
@@ -96,11 +95,11 @@ function ResSeat() {
           <span className="oi oi-x"></span> Cancel
           </button>
           </div>
-        
         <ErrorAlert error={tablesError} />
         <ErrorAlert error={reservationError} />
       </div>
-    </>
+      </form>
+    </main>
   );
 }
 

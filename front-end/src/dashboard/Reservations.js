@@ -54,22 +54,22 @@ function Reservations({ reservation, type }) {
             <>
               <Link
                 to={`/reservations/${reservation.reservation_id}/seat`}
-                className="btn btn-info btn-sm"
+                className="btn btn-outline-info btn-sm font-weight-bold"
               >
                 Seat
               </Link>
               <button
                 data-reservation-id-cancel={reservation.reservation_id}
-                className="mx-3 btn btn-danger btn-sm"
+                className="mx-3 btn btn-outline-danger btn-sm font-weight-bold"
                 onClick={handleCancel}
               >
-                Cancel
+                <span className="oi oi-trash"></span> Cancel
               </button>
               <Link
                 to={`/reservations/${reservation.reservation_id}/edit`}
-                className="btn btn-warning btn-sm"
+                className="btn btn-outline-warning btn-sm font-weight-bold"
               >
-                Edit
+                <span className="oi oi-pencil"></span> Edit
               </Link>
             </>
           ) : null}

@@ -32,51 +32,72 @@ function TableForm() {
   };
 
   return (
-    <>
-      <div className="d-flex flex-column align-items-center">
-        <h2 className="text-center pb-2">Create a New Table</h2>
-        <form action="" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="first_name" className="form-label">
-              Table name:
-              <input
-                className="form-control"
-                id="table_name"
-                type="text"
-                name="table_name"
-                onChange={handleChange}
-                value={formData.table_name}
-                required
-              />
-            </label>
-          </div>
-          <div className="form-group">
-            <label htmlFor="people" className="form-label">
-              capacity:
-              <input
-                className="form-control"
-                id="capacity"
-                type="number"
-                min="1"
-                max="22"
-                name="capacity"
-                onChange={handleChange}
-                value={formData.capacity}
-                required
-              />
-            </label>
-          </div>
-          <div className="form-group">
-            <button className="btn btn-sm btn-info" type="submit">Submit</button>
-            <button className="mx-3 btn btn-sm btn-danger" onClick={() => history.goBack()}>
-              Cancel
-            </button>
-            <button className="btn btn-sm btn-warning" onClick={() => setFormData(initialState)}>Reset</button>
-          </div>
-        </form>
+    <main>
+      <form action="" onSubmit={handleSubmit}>
         <ErrorAlert error={tablesError} />
-      </div>
-    </>
+        <div className="card border-secondary mt-2">
+          <div className="card-header text-center bg-dark text-light">
+            <h2>Create a New Table</h2>
+          </div>
+          <div className="form-col d-flex justify-content-center">
+            <div className="form-group">
+              <label htmlFor="first_name" className="form-label">
+                Table name:
+                <input
+                  className="form-control border-secondary bg-light"
+                  placeholder="#x"
+                  id="table_name"
+                  type="text"
+                  name="table_name"
+                  onChange={handleChange}
+                  value={formData.table_name}
+                  required
+                />
+              </label>
+
+              <div className="form-group">
+                <label htmlFor="people" className="form-label">
+                  Capacity:
+                  <input
+                    className="form-control border-secondary bg-light"
+                    id="capacity"
+                    type="number"
+                    min="1"
+                    max="22"
+                    name="capacity"
+                    onChange={handleChange}
+                    value={formData.capacity}
+                    required
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
+          <div className="form-row d-flex justify-content-center">
+            <div className="form-group mx-4">
+              <button  
+              type="submit" 
+              className="m-2 btn btn-sm btn-outline-info font-weight-bold"
+              >
+                <span className="oi oi-check"></span> Submit
+              </button>
+              <button
+                className="m-2 btn btn-sm btn-outline-danger font-weight-bold"
+                onClick={() => history.goBack()}
+              >
+                <span className="oi oi-x"></span> Cancel
+              </button>
+              <button
+                className="m-2 btn btn-sm btn-outline-warning font-weight-bold"
+                onClick={() => setFormData(initialState)}
+              >
+                <span className="oi oi-action-undo"></span> Reset
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </main>
   );
 }
 

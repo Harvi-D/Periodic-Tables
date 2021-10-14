@@ -34,21 +34,24 @@ function SearchByNumber() {
   };
 
   return (
-    <>
-      <h2 className="text-center pb-2">Search for Reservation</h2>
+    <main>
+      <div className="card border-secondary mt-2">
+      <h2 className="card-header text-center bg-dark text-light">
+        Search for Reservation
+        </h2>
       <div className="d-flex flex-column align-items-center">
         <form onSubmit={handleSearch} className="mt-3 w-50 text-center">
           <div className="form-group">
             <input
               name="mobile_number"
-              placeholder="customer's phone number"
+              placeholder="Enter a phone number"
               onChange={handleChange}
-              className="form-control"
+              className="form-control border-secondary bg-light"
               required
             />
           </div>
-          <button type="submit" className="btn btn-light mb-5">
-            Find
+          <button type="submit" className="btn btn-outline-info mb-5">
+          <span className="oi oi-magnifying-glass"></span> Find
           </button>
         </form>
         {reservationsContent.length !== 0 ? <h3>Reservations</h3> : ""}
@@ -61,7 +64,8 @@ function SearchByNumber() {
           {reservationsContent}
         </div>
       </div>
-    </>
+      </div>
+    </main>
   );
 }
 

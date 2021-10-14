@@ -181,20 +181,20 @@ function ResForm({ type }) {
         </div>
         <div className="form-row d-flex justify-content-center">
         <div className="form-group mx-4">
-          <button type="submit" className="btn btn-sm btn-outline-info font-weight-bold">
+          <button type="submit" className="m-2 btn btn-sm btn-outline-info font-weight-bold">
           <span className="oi oi-check"></span> Submit
           </button>
           <button
-            className="m-3 btn btn-sm btn-outline-danger font-weight-bold"
+            className="m-2 btn btn-sm btn-outline-danger font-weight-bold"
             onClick={() => history.goBack()}
           >
            <span className="oi oi-x"></span> Cancel
           </button>
           <button
-            className="btn btn-sm btn-outline-warning font-weight-bold"
+            className="m-2 btn btn-sm btn-outline-warning font-weight-bold"
             onClick={() => setFormData(initialState)}
           >
-            Reset
+            <span className="oi oi-action-undo"></span> Reset
           </button>
         </div>
         </div>

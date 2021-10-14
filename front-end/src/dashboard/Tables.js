@@ -17,7 +17,9 @@ function Tables({ table }) {
   };
   return (
     <>
-      <div className="card m-3 bg-light" style={{ width: "10rem" }}>
+      <div 
+      className="card m-3 bg-light border-secondary" 
+      style={{ width: "10rem" }}>
         <div className="card-body">
           <h5 className="card-title">Table {table.table_name}</h5>
           <h6 className="card-subtitle mb-2 text-muted">
@@ -32,6 +34,7 @@ function Tables({ table }) {
             <button
               data-table-id-finish={table.table_id}
               onClick={handleFinish}
+              className="btn-outline-warning rounded font-weight-bold"
             >
               Finish
             </button>

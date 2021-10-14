@@ -43,14 +43,29 @@ function Dashboard() {
   return (
     <main className="text-center">
       <h1 className="m-3">{formatDate(date)}</h1>
-      <button onClick={() => setDate(previous(date))} className="btn btn-sm btn-light">Previous Day</button>
-      <button className="mx-3 btn btn-sm btn-light" onClick={() => setDate(today())}>
+      <button 
+        onClick={() => setDate(previous(date))} 
+        className="btn btn-sm btn-secondary font-weight-bold text-light">
+          <span className="oi oi-arrow-left"></span> Previous Day
+          </button>
+      <button 
+      onClick={() => setDate(today())}
+      className="mx-3 btn btn-sm btn-dark font-weight-bold text-light" 
+      >
         Today
       </button>
-      <button onClick={() => setDate(next(date))} className="btn btn-sm btn-light">Next Day</button>
+      <button 
+      onClick={() => setDate(next(date))} 
+      className="btn btn-sm btn-secondary font-weight-bold text-light"
+      >
+        Next Day <span className="oi oi-arrow-right"></span>
+        </button>
       <br />
-      <label htmlFor="reservation_date" className="form-label m-3">
+      <label 
+      htmlFor="reservation_date" 
+      className="form-label m-3 bg-light">
         <input
+          className="border-secondary rounded"
           type="date"
           pattern="\d{4}-\d{2}-\d{2}"
           name="reservation_date"
@@ -61,12 +76,6 @@ function Dashboard() {
       <div className="d-md-flex mb-3 "></div>
       <ErrorAlert error={reservationsError} />
       <ErrorAlert error={tablesError} />
-      <h3>Tables </h3>
-      <div className="d-flex justify-content-center mb-1 flex-wrap">
-        {tables.map((table) => (
-          <Tables key={table.table_id} table={table} />
-        ))}
-      </div>
       {reservations.length ? (
         <h3>Reservations</h3>
       ) : (
@@ -80,6 +89,13 @@ function Dashboard() {
           />
         ))}
       </div>
+      <h3>Tables </h3>
+      <div className="d-flex justify-content-center mb-1 flex-wrap">
+        {tables.map((table) => (
+          <Tables key={table.table_id} table={table} />
+        ))}
+      </div>
+      
     </main>
   );
 }
