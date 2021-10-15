@@ -1,5 +1,7 @@
 # Periodic Tables
 
+[Live Application](https://restaurant-reservation-nu.vercel.app/dashboard)
+
 
 ## Installation
 
@@ -38,7 +40,7 @@ Using ***Periodic Tables*** allows restaurant employees to:
 ### Navigation
 ![Navigation Menu](/front-end/screenshots/nav-bar.png)
 
-Provides links to: [Dashboard](#dash), [New Reservation](#new-reservation), [New Table](#new-table), and [Search](#search).
+Provides links to: the Dashboard, New Reservations, New Tables, and the Search feature.
 
 ### Dashboard
 ![Dashboard](/front-end/screenshots/dash.png)
@@ -48,7 +50,7 @@ This is the primary interface for browsing the restaurants tables and managing r
 ### New Reservation
 ![New Reservation](/front-end/screenshots/new-reservation.png)
 
-This is the form that allows workers to create a new reservation for a customer. All inputs are required and validated based on the hours and days that the restaurant operates, the party size in comparison to the table capacity, and ensures that the requested date is made for a past date.
+This is the form that allows workers to create a new reservation for a customer. All inputs are required and validated based on the hours and days that the restaurant operates, the party size, and ensures that the requested date is made for a past date.
 
 Once submitted the user will be redirected to the dashboard, and the new reservation will be displayed on the date requested. The cancel button will return users to the previous screen, and the reset button will return all inputs to their initial empty state.
 
@@ -61,10 +63,30 @@ Once a new reservation is displayed on the dashboard, users can click the 'Edit'
 ### Cancel Reservation
 ![Cancel Reservation](/front-end/screenshots/new-reservation-cancel.png)
 
+The 'Cancel' button on a reservation listed on the dashboard will permanentely delete it from the database.
+
+### Seat Reservation
+![Seat Reservation](/front-end/screenshots/seat-reservation.png)
+
+This page will allow users to select a table for a reservation once the party is ready to be seated. The application will verify that the table capacity is not too small compared to the party size, and allow the user to submit the selection. Once a table is selected and submitted, the user will be returned to the dashboard, and the selected table will now be marked as occupied.
+
+![Seat](/front-end/screenshots/seat.png)
+
+Once the party has left the table, the user can now click the 'Finish' button to mark the table as 'free' again after clicking 'OK' on the dialogue box that appears.
+
+![Finish Seat](/front-end/screenshots/seat-finish.png)
+
 ### New Table
 ![New Table](/front-end/screenshots/new-table.png)
 
-This form will let employees 
+This form will let users create new tables and add them to the database. New tables must have a name longer than two characters and a minimum capacity of one.
+
+### Search by Number
+![Search by Number](/front-end/screenshots/search.png)
+
+This page allows users to enter a customers phone number to locate their reservation. This gives users an alternate method to find reservations when it is not optimal to find a reservation based on the date.
+
+![Found Reservation](/front-end/screenshots/search-after.png)
 
 
 ## API Routes
