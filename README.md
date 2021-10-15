@@ -59,7 +59,7 @@ Once submitted the user will be redirected to the dashboard, and the new reserva
 Once a new reservation is displayed on the dashboard, users can click the 'Edit' button to make changes to it. Users will be returned to the Reservation form and can resubmit the reservation once the desired changes have been made.
 
 ### Cancel Reservation
-![Cancel Reservation](/front-end/screenshots/.png)
+![Cancel Reservation](/front-end/screenshots/new-reservation-cancel.png)
 
 ### New Table
 ![New Table](/front-end/screenshots/new-table.png)
