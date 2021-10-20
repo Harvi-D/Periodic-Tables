@@ -33,7 +33,7 @@ Using ***Periodic Tables*** allows restaurant employees to:
 * React: UI logic and rendering
 * Bootstrap: UI styling
 * PostgreSQL: SQL database for application data
-* ElephantSQL: host of postreSQL instance
+* ElephantSQL: host of postgreSQL instance
 * Vercel: hosts production deployment
 
 ## Application Previews
