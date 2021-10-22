@@ -16,7 +16,7 @@
 
 ## Usage
 
-A full-stack reservation system designed to simplify the management of a restaurants daily reservations. 
+A full-stack reservation system designed to simplify the management of a restaurant's daily reservations. 
 Using ***Periodic Tables*** allows restaurant employees to:
 
 * Create and Edit new reservations for customers
